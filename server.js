@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 app.get("/", function(res,res){
 
-    res.sendFiles(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/reserve", function(req, res){
