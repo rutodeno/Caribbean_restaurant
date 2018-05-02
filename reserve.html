@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="jumbotron" style="text-align:center">
+            <h1>
+                <span class="glyphicon glyphicon-fire" aria-hidden="false"></span>Hot Restaurant</h1>
+            <h3>We only have 5 tables! Book your seat before they are all gone!</h3>
+            <hr>
+            <a href="/seating">  
+                <button id="view-tables" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-credit-card" aria-hidden="false"></span>&nbsp;View Tables</button>
+            </a>
+            <!--<a href="reservation.html"><button id="make-reservation" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="false"></span>&nbsp;Make Reservartion</button></a> -->
+            <a href="/">
+                <button id="go-home" class="btn btn-danger btn-lg">
+                    <span class="glyphicon glyphicon-home" aria-hidden="false"></span>&nbsp;Home</button>
+            </a>
+        </div>
+
+
+        <!--TRAIN FORM-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header card-header-title">
+                            <h3>Table Reservation</h3>
+                        </div>
+                    </div>
+
+
+                    <form class="card-body">
+                        <div class="form-group">
+                            <label-for="train-name">
+                                <strong>Name</strong>
+                                </label-for>
+                                <input class="form-control" id="name" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label-for="destination">
+                                <strong>Phone number</strong>
+                                </label-for>
+                                <input class="form-control" id="phoneNumber" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label-for="first-train-time">
+                                <strong>Email:</strong>
+                                </label-for>
+                                <input class="form-control" id="email" type="email">
+                        </div>
+                        <div class="form-group">
+                            <label-for="frequency">
+                                <strong>Unique ID:</strong>
+                                </label-for>
+                                <input class="form-control" id="uniqueID" type="text">
+                        </div>
+                        <button  id="submit-data" class="btn btn-primary" type="submit" >Submit</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $("#submit-data").on("click", function (event) {
+            event.preventDefault();
+            var newTable = {
+                tableNumber: $("#uniqueID").val().trim(), // we need to change this to something more unique
+                name: $("#name").val().trim(),
+                phoneNumber: $("#phoneNumber").val().trim(),
+                email: $("#email").val().trim()
+            };
+
+            console.log(newTable);
+
+            $.post("/api/tables", newTable)
+                .then(function (data) {
+                    console.log("reservation.html", data)
+                    alert("You have been booked ...")
+
+                   // $(".form-group").trigger("reset");  // form not reseting. 
+                    
+                });
+        })
+    </script>
+</body>
+
+</html>
